@@ -19,7 +19,7 @@ rl.on('close', function (cmd) {
   var date = new Date();
   var date_name = (date.getMonth() + 1) + "-" + date.getDate() + "-" + date.getFullYear() + "-" + (date.getHours() % 12 == 0 ? 12 : date.getHours() % 12) + ":" + date.getMinutes() + (date.getHours < 12  ? "AM" : "PM");
 
-  var template = "-var note = '" + input.join("<br>") + "'\ninclude ../layout.pug";
+  var template = "-var note = '" + input.join("<br>").replace(/'/g, "\\'").replace(/"/g, '\\"') + "'\ninclude ../layout.pug";
 
   fs.writeFileSync("./drafts/" + date_name + ".pug", template);
 
