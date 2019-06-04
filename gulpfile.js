@@ -9,6 +9,13 @@ var chrono = require("chrono-node");
 gulp.task('default', ['views']);
 
 gulp.task('views', function buildHTML() {
+  fs.readdir(__dirname + '/posts', function(error, notes){
+    for(var i = 0; i < notes.length; i++){
+      fs.unlink(__dirname + '/posts/' + notes[i], function(err){
+      });
+    }
+  });
+  
   fs.readdir(__dirname + '/drafts', function(error, notes){
     notes = notes.map(function(d){
       return {
