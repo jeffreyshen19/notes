@@ -6,8 +6,6 @@ var data = require('gulp-data');
 var es = require('event-stream');
 var chrono = require("chrono-node");
 
-gulp.task('default', ['views']);
-
 gulp.task('views', function buildHTML() {
   fs.readdir(__dirname + '/posts', function(error, notes){
     for(var i = 0; i < notes.length; i++){
@@ -15,7 +13,7 @@ gulp.task('views', function buildHTML() {
       });
     }
   });
-  
+
   fs.readdir(__dirname + '/drafts', function(error, notes){
     notes = notes.map(function(d){
       return {
@@ -40,3 +38,7 @@ gulp.task('views', function buildHTML() {
       .pipe(gulp.dest('./posts')));
   });
 });
+
+
+
+gulp.task('default', gulp.series('views'));
